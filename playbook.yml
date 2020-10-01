@@ -1,0 +1,59 @@
+---
+- name: All hosts up-to-date
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+    - evandam.conda
+    - kevincoakley.anaconda
+    - jpedrodelacerda.yay
+    - kewlfft.aur
+
+  tasks:
+    - name: Install basic python packages
+      pip:
+        name:
+          - pytest
+          - pytest-cov
+          - pytest-xdist
+          - pytest-sugar
+          - cython
+          - black
+          - numba
+          - numpy
+          - lxml
+          - aiohttp[speedups]
+          - tensorflow
+          - uvloop
+          - poetry
+          - pylint
+          - jupyterlab
+
+    # - name: Install python packages from conda-forge packages
+    #   conda:
+    #     name:
+    #     - xeus-cling
+    #     - xwidgets
+    #     state: latest
+    #     environment: base
+    #     channels: conda-forge
+
+    - name: Installing system packages
+      become: yes
+      pacman:
+        name: chromium, dolphin, ark, ktorrent, gwenview, ksysguard, elisa, filelight, polybar, ffmpeg, uget, nodejs, aria2, picom
+        state: latest
+
+    - name: Installing aur packages
+      aur:
+        name:
+          - vscodium-bin
+          - lutris
+          - docker
+          - ulauncher
+        state: latest
+
+    - name: full system upgrade
+      become: yes
+      pacman:
+        update_cache: yes
+        upgrade: yes
