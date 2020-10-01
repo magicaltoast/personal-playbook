@@ -27,6 +27,7 @@
           - poetry
           - pylint
           - jupyterlab
+          - thefuck
 
     # - name: Install python packages from conda-forge packages
     #   conda:
@@ -40,7 +41,7 @@
     - name: Installing system packages
       become: yes
       pacman:
-        name: chromium, dolphin, ark, ktorrent, gwenview, ksysguard, elisa, filelight, polybar, ffmpeg, uget, nodejs, aria2, picom
+        name: chromium, dolphin, ark, ktorrent, gwenview, ksysguard, elisa, filelight, polybar, ffmpeg, uget, nodejs, aria2, picom, fish
         state: latest
 
     - name: Installing aur packages
@@ -48,6 +49,7 @@
         name:
           - vscodium-bin
           - multimc5
+          - alacritty
           - docker
           - ulauncher
         state: latest
